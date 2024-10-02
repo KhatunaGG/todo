@@ -26,7 +26,7 @@ const Todo = ({
   completed,
   toggleCompleted,
   deleteTodo,
-  inputValue,
+
 }: TodoPropType) => {
   const context = useContext(GlobalContext);
   if (!context) return;

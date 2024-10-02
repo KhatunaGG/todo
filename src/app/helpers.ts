@@ -4,7 +4,7 @@ import { TodosType } from "./context/Context";
 
 
 export const downloadTodos = (todoContainer: TodosType[], format: "txt" | "pdf") => {
-    let fileContent = todoContainer
+    const fileContent = todoContainer
       .map((todo) => `ID: ${todo.id}\nText: ${todo.text}\nCompleted: ${todo.completed ? "Yes" : "No"}\nColor: ${todo.color}`)
       .join("\n\n");
   
