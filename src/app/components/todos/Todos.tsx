@@ -13,6 +13,7 @@ const Todos = () => {
     handleSubmit,
     toggleCompleted,
     deleteTodo,
+    showText
   } = context;
 
   return (
@@ -29,6 +30,7 @@ const Todos = () => {
           toggleCompleted={toggleCompleted}
           deleteTodo={deleteTodo}
           inputValue={el.inputValue}
+          showText={el.showtext}
         />
       ))}
     </>

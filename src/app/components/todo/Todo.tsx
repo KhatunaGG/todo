@@ -4,6 +4,8 @@ import { ChangeEvent, FormEvent, useContext } from "react";
 import Download from "../Download/Download";
 import Delete from "../Delete/Delete";
 import { downloadTodos } from "../../helpers";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export type TodoPropType = {
   id: number;
@@ -15,6 +17,7 @@ export type TodoPropType = {
   toggleCompleted: (id: number) => void;
   deleteTodo: (id: number) => void;
   inputValue: string;
+  showText: boolean;
 };
 
 const Todo = ({
@@ -27,6 +30,7 @@ const Todo = ({
   toggleCompleted,
   deleteTodo,
   inputValue,
+  showText,
 }: TodoPropType) => {
   const context = useContext(GlobalContext);
   if (!context) return;
@@ -34,6 +38,10 @@ const Todo = ({
 
   const handleDownload = (format: "txt" | "pdf") => {
     downloadTodos(todoContainer, format);
+    toast.info("Todos downloaded successfully!", {
+      position: "top-left",
+      autoClose: 2000,
+    });
   };
 
   return (
@@ -50,29 +58,43 @@ const Todo = ({
         </button>
       </div>
 
-      <form onSubmit={(e) => handleSubmit(id, e)}>
+      <form
+        className={showText ? "mb-0" : "mb-6"}
+        onSubmit={(e) => handleSubmit(id, e)}
+      >
         <input
           onChange={(e) => handleChange(id, e)}
           type="text"
-          className="w-[80%] p-2"
+          className="w-[80%] p-2 rounded-l-md outline-none"
           value={inputValue}
         />
-        <button type="submit" className="w-[20%] bg-green-400 p-2">
-          add
+        <button
+          type="submit"
+          className="w-[20%] bg-green-400 p-2 rounded-r-md font-bold"
+        >
+          Add
         </button>
       </form>
 
-      <div className="mt-2">
-        <input
-          onChange={() => toggleCompleted(id)}
-          type="checkbox"
-          name=""
-          id=""
-          checked={completed === true}
-        />
-      </div>
-
-      <p>{text}</p>
+      {showText && (
+        <div className="flex gap-2 items-center">
+          <div className="mt-2">
+            <input
+              onChange={() => toggleCompleted(id)}
+              type="checkbox"
+              name=""
+              id=""
+              checked={completed === true}
+            />
+          </div>
+          <p
+            style={{ marginTop: "4px" }}
+            className={completed ? "line-through" : "none"}
+          >
+            {text}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
