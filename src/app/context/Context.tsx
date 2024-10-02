@@ -37,7 +37,7 @@ export const colors = ["red", "green", "yellow", "blue"];
 const Context = ({ children }: { children: React.ReactNode }) => {
   const [showButtons, setShowButtons] = useState(false);
   const [todoContainer, setTodoContainer] = useState<TodosType[]>([]);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue] = useState("");
 
 
   useEffect(() => {
