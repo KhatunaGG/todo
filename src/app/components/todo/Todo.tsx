@@ -1,16 +1,33 @@
 "use client";
 import { GlobalContext } from "@/app/context/Context";
-import { useContext } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import Download from "../Download/Download";
+import Delete from "../Delete/Delete";
 
 export type TodoPropType = {
   id: number;
   color: string;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (id: number, e: FormEvent<HTMLFormElement>) => void;
+  text: string;
+  completed: boolean;
+  toggleCompleted: (id: number) => void;
+  deleteTodo: (id: number) => void;
 };
 
-const Todo = ({ color, id }: TodoPropType) => {
+const Todo = ({
+  color,
+  id,
+  text,
+  handleChange,
+  handleSubmit,
+  completed,
+  toggleCompleted,
+  deleteTodo,
+}: TodoPropType) => {
   const context = useContext(GlobalContext);
   if (!context) return;
-  console.log(id)
+  console.log(id);
 
   return (
     <div
@@ -18,20 +35,36 @@ const Todo = ({ color, id }: TodoPropType) => {
       className="w-full bg-blue-400 p-4 rounded-lg flex flex-col gap-2"
     >
       <div className="w-full flex justify-end gap-6 mb-4">
-        <button>X</button>
-        <button>?</button>
+        <button onClick={() => deleteTodo(id)}>
+          <Delete />
+        </button>
+        <button>
+          <Download />
+        </button>
       </div>
 
-      <form>
-        <input type="text" className="w-[80%] p-2" />
-        <button className="w-[20%] bg-green-400 p-2">add</button>
+      <form onSubmit={(e) => handleSubmit(id, e)}>
+        <input
+          onChange={(e) => handleChange(e)}
+          type="text"
+          className="w-[80%] p-2"
+        />
+        <button type="submit" className="w-[20%] bg-green-400 p-2">
+          add
+        </button>
       </form>
 
       <div className="mt-2">
-        <input type="checkbox" name="" id="" />
+        <input
+          onChange={() => toggleCompleted(id)}
+          type="checkbox"
+          name=""
+          id=""
+          checked={completed === true}
+        />
       </div>
 
-      <p></p>
+      <p>{text}</p>
     </div>
   );
 };

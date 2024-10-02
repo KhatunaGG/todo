@@ -7,12 +7,22 @@ const Todos = () => {
   const context = useContext(GlobalContext);
   if (!context) return;
 
-  const { todoContainer } = context;
+  const { todoContainer, handleChange, handleSubmit, toggleCompleted, deleteTodo } = context;
 
   return (
     <>
       {todoContainer.map((el) => (
-        <Todo key={el.id} color={el.color} id={el.id} />
+        <Todo
+          key={el.id}
+          color={el.color}
+          id={el.id}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          text={el.text}
+          completed={el.completed}
+          toggleCompleted={toggleCompleted}
+          deleteTodo={deleteTodo}
+        />
       ))}
     </>
   );

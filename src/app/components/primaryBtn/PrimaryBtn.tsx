@@ -29,7 +29,7 @@ const PrimaryBtn = () => {
   const { setShowButtons, showButtons, handleCreate } = context;
 
   return (
-    <div className="sticky bottom-[-50vh] right-0 flex flex-col gap-4 h-[100vh] justify-start items-end pr-4">
+    <div className="absolute flex flex-col gap-4 top-0 right-0 justify-start items-end pr-4">
       {showButtons && (
         <div className="flex flex-col gap-2">
           {colors.map((color, i) => (
