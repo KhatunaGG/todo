@@ -1,24 +1,13 @@
 "use client";
 import { GlobalContext } from "@/app/context/Context";
-import { ChangeEvent, FormEvent, useContext } from "react";
+import { useContext } from "react";
 import Download from "../Download/Download";
 import Delete from "../Delete/Delete";
 import { downloadTodos } from "../../helpers";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { TodoPropType } from "@/app/interfaces";
 
-export type TodoPropType = {
-  id: number;
-  color: string;
-  handleChange: (id: number, e: ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (id: number, e: FormEvent<HTMLFormElement>) => void;
-  text: string;
-  completed: boolean;
-  toggleCompleted: (id: number) => void;
-  deleteTodo: (id: number) => void;
-  inputValue: string;
-  showText: boolean;
-};
 
 const Todo = ({
   color,
