@@ -8,7 +8,7 @@ import { downloadTodos } from "../../helpers";
 export type TodoPropType = {
   id: number;
   color: string;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (id: number, e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (id: number, e: FormEvent<HTMLFormElement>) => void;
   text: string;
   completed: boolean;
@@ -26,7 +26,7 @@ const Todo = ({
   completed,
   toggleCompleted,
   deleteTodo,
-
+  inputValue,
 }: TodoPropType) => {
   const context = useContext(GlobalContext);
   if (!context) return;
@@ -52,9 +52,10 @@ const Todo = ({
 
       <form onSubmit={(e) => handleSubmit(id, e)}>
         <input
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => handleChange(id, e)}
           type="text"
           className="w-[80%] p-2"
+          value={inputValue}
         />
         <button type="submit" className="w-[20%] bg-green-400 p-2">
           add
