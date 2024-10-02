@@ -7,7 +7,7 @@ const Todos = () => {
   const context = useContext(GlobalContext);
   if (!context) return;
 
-  const { todoContainer, } = context;
+  const { todoContainer } = context;
 
   return (
     <>

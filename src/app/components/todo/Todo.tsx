@@ -10,7 +10,7 @@ export type TodoPropType = {
 const Todo = ({ color, id }: TodoPropType) => {
   const context = useContext(GlobalContext);
   if (!context) return;
-
+  console.log(id)
 
   return (
     <div
@@ -22,12 +22,8 @@ const Todo = ({ color, id }: TodoPropType) => {
         <button>?</button>
       </div>
 
-      <form
-      
-      action="">
-        <input
-
-        type="text" className="w-[80%] p-2" />
+      <form>
+        <input type="text" className="w-[80%] p-2" />
         <button className="w-[20%] bg-green-400 p-2">add</button>
       </form>
 
