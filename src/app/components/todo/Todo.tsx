@@ -3,6 +3,7 @@ import { GlobalContext } from "@/app/context/Context";
 import { ChangeEvent, FormEvent, useContext } from "react";
 import Download from "../Download/Download";
 import Delete from "../Delete/Delete";
+import { downloadTodos } from "../../helpers";
 
 export type TodoPropType = {
   id: number;
@@ -13,6 +14,7 @@ export type TodoPropType = {
   completed: boolean;
   toggleCompleted: (id: number) => void;
   deleteTodo: (id: number) => void;
+  inputValue: string;
 };
 
 const Todo = ({
@@ -24,10 +26,15 @@ const Todo = ({
   completed,
   toggleCompleted,
   deleteTodo,
+  inputValue,
 }: TodoPropType) => {
   const context = useContext(GlobalContext);
   if (!context) return;
-  console.log(id);
+  const { todoContainer } = context;
+
+  const handleDownload = (format: "txt" | "pdf") => {
+    downloadTodos(todoContainer, format);
+  };
 
   return (
     <div
@@ -38,7 +45,7 @@ const Todo = ({
         <button onClick={() => deleteTodo(id)}>
           <Delete />
         </button>
-        <button>
+        <button onClick={() => handleDownload("pdf")}>
           <Download />
         </button>
       </div>

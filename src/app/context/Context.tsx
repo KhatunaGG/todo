@@ -19,6 +19,7 @@ export type GlobalContextType = {
   handleSubmit: (id: number, e: FormEvent<HTMLFormElement>) => void;
   toggleCompleted: (id: number) => void;
   deleteTodo: (id: number) => void;
+  inputValue: string;
 };
 
 export type TodosType = {
@@ -73,18 +74,20 @@ const Context = ({ children }: { children: React.ReactNode }) => {
     setTodoContainer((prev) =>
       prev.map((el) => (el.id === id ? { ...el, text: inputValue } : el))
     );
-    setInputValue(""); 
+    setInputValue("");
   };
 
   const toggleCompleted = (id: number) => {
-    setTodoContainer((prev) => prev.map((el) => el.id === id ? {...el, completed: !el.completed} : el))
-
-  }
+    setTodoContainer((prev) =>
+      prev.map((el) =>
+        el.id === id ? { ...el, completed: !el.completed } : el
+      )
+    );
+  };
 
   const deleteTodo = (id: number) => {
-    setTodoContainer((prev) => prev.filter((el) => el.id !== id) )
-
-  }
+    setTodoContainer((prev) => prev.filter((el) => el.id !== id));
+  };
 
   return (
     <GlobalContext.Provider
@@ -97,7 +100,8 @@ const Context = ({ children }: { children: React.ReactNode }) => {
         handleChange,
         handleSubmit,
         toggleCompleted,
-        deleteTodo
+        deleteTodo,
+        inputValue,
       }}
     >
       <div>{children}</div>

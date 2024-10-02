@@ -7,7 +7,14 @@ const Todos = () => {
   const context = useContext(GlobalContext);
   if (!context) return;
 
-  const { todoContainer, handleChange, handleSubmit, toggleCompleted, deleteTodo } = context;
+  const {
+    todoContainer,
+    handleChange,
+    handleSubmit,
+    toggleCompleted,
+    deleteTodo,
+    inputValue,
+  } = context;
 
   return (
     <>
@@ -22,6 +29,7 @@ const Todos = () => {
           completed={el.completed}
           toggleCompleted={toggleCompleted}
           deleteTodo={deleteTodo}
+          inputValue={inputValue}
         />
       ))}
     </>
