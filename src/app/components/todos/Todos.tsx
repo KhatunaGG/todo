@@ -13,7 +13,6 @@ const Todos = () => {
     handleSubmit,
     toggleCompleted,
     deleteTodo,
-    showText
   } = context;
 
   return (
