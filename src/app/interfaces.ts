@@ -34,4 +34,5 @@ export type TodoPropType = {
   deleteTodo: (id: number) => void;
   inputValue: string;
   showText: boolean;
+  el: TodosType;
 };

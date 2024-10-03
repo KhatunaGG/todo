@@ -7,7 +7,7 @@ import { downloadTodos } from "../../helpers";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { TodoPropType } from "@/app/interfaces";
-
+import { Reorder, useMotionValue } from "framer-motion";
 
 const Todo = ({
   color,
@@ -20,10 +20,12 @@ const Todo = ({
   deleteTodo,
   inputValue,
   showText,
+  el,
 }: TodoPropType) => {
   const context = useContext(GlobalContext);
   if (!context) return;
   const { todoContainer } = context;
+  const y = useMotionValue(0);
 
   const handleDownload = (format: "txt" | "pdf") => {
     downloadTodos(todoContainer, format);
@@ -34,9 +36,10 @@ const Todo = ({
   };
 
   return (
-    <div
-      style={{ background: color }}
-      className="w-full bg-blue-400 p-4 rounded-lg flex flex-col gap-2 shadow-md"
+    <Reorder.Item
+      value={el}
+      style={{ background: color, y }}
+      className="w-full  p-4 rounded-lg flex flex-col gap-2 shadow-lg"
     >
       <div className="w-full flex justify-end gap-6 mb-4">
         <button onClick={() => deleteTodo(id)}>
@@ -84,7 +87,7 @@ const Todo = ({
           </p>
         </div>
       )}
-    </div>
+    </Reorder.Item>
   );
 };
 

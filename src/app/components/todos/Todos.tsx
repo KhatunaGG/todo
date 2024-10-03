@@ -2,6 +2,7 @@
 import { GlobalContext } from "@/app/context/Context";
 import { useContext } from "react";
 import Todo from "../todo/Todo";
+import { Reorder } from "framer-motion";
 
 const Todos = () => {
   const context = useContext(GlobalContext);
@@ -13,10 +14,16 @@ const Todos = () => {
     handleSubmit,
     toggleCompleted,
     deleteTodo,
+    setTodoContainer,
   } = context;
 
   return (
-    <>
+    <Reorder.Group
+      axis="y"
+      values={todoContainer}
+      onReorder={setTodoContainer}
+      className="flex flex-col gap-6"
+    >
       {todoContainer.map((el) => (
         <Todo
           key={el.id}
@@ -30,9 +37,10 @@ const Todos = () => {
           deleteTodo={deleteTodo}
           inputValue={el.inputValue}
           showText={el.showtext}
+          el={el}
         />
       ))}
-    </>
+    </Reorder.Group>
   );
 };
 
