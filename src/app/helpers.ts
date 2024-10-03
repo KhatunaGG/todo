@@ -1,6 +1,6 @@
 import { saveAs } from "file-saver";
 import { jsPDF } from "jspdf";
-import { TodosType } from "./context/Context";
+import { TodosType } from "../app/interfaces";
 
 
 export const downloadTodos = (todoContainer: TodosType[], format: "txt" | "pdf") => {

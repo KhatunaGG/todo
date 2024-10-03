@@ -36,7 +36,7 @@ const Todo = ({
   return (
     <div
       style={{ background: color }}
-      className="w-full bg-blue-400 p-4 rounded-lg flex flex-col gap-2"
+      className="w-full bg-blue-400 p-4 rounded-lg flex flex-col gap-2 shadow-md"
     >
       <div className="w-full flex justify-end gap-6 mb-4">
         <button onClick={() => deleteTodo(id)}>
