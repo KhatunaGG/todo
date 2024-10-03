@@ -22,10 +22,10 @@ const Todo = ({
   showText,
   el,
 }: TodoPropType) => {
+  const y = useMotionValue(0);
   const context = useContext(GlobalContext);
   if (!context) return;
   const { todoContainer } = context;
-  const y = useMotionValue(0);
 
   const handleDownload = (format: "txt" | "pdf") => {
     downloadTodos(todoContainer, format);
